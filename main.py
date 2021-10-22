@@ -25,10 +25,10 @@ while B:
     fps.tick(60)
     
     for pouss,pos in Map:
-        grav=Vec(a=pouss.pos,b=pouss.anchor)
+        """grav=Vec(a=pouss.pos,b=pouss.anchor)
         grav.long/=2
         pouss.vec+=grav
-        pouss.pos+=pouss.vec
+        pouss.pos+=pouss.vec"""
         pg.draw.circle(f,0xffffff,(pouss.pos.x*50,pouss.pos.y*50),5)
         
     mousepos=pg.mouse.get_pos()
