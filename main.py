@@ -1,16 +1,15 @@
 import math
 from random import random,choice
 import pygame as pg
-#from perlin_noise import PerlinNoise
+from perlin_noise import PerlinNoise
 
-#noise = PerlinNoise(octaves=10, seed=1)
+noise = PerlinNoise(octaves=10, seed=1)
 screen=(500,500)
 
 class Ball:
     def __init__(self,x,y):
         self.x,self.y=x,y
         self.vecx,self.vecy=0,0
-        
         self.aimx,self.aimy=choice(aims)
         self.coul=0xaaaaaa
         self.dist=0
