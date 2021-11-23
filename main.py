@@ -21,7 +21,7 @@ class Ball:
     
     def move(self):
         val=noise.pnoise2(self.x/screen[0],self.y/screen[1],octaves=10,base=depx)
-        self.coul=hsv_to_rgb((val+1),1,255)
+        self.coul=hsv_to_rgb(0,1,(val+.5)*255)
         self.vecx=math.cos(val*math.pi)*sizeXspeed
         self.vecy=math.sin(val*math.pi)*sizeXspeed
                 
@@ -49,7 +49,7 @@ balls=[Ball(*[int(random()*dim) for dim in screen]) for _ in range(500)]
 b=True
 fps=pg.time.Clock()
 while b:
-    fps.tick(60)
+    #fps.tick(60)
     pg.display.update()
     f.blit(mask,(0,0))
     for ball in balls:
@@ -59,23 +59,24 @@ while b:
 
         
     for event in pg.event.get():
-        if event.type==pg.QUIT:
-            b=pg.quit()
-        elif event.type==pg.MOUSEBUTTONUP:
-            if event.button==4 or event.button==5:
-                sizeXspeed+=1 if event.button==4 else -1
-            new_ball()
-            seed()
-        elif event.type==pg.KEYUP:
-            if event.key==pg.K_UP:
-                depx+=1
-            elif event.key==pg.K_DOWN:
-                depx-=1
-        elif event.type==pg.VIDEORESIZE:
-            screen=event.w,event.h
-            mask=pg.Surface(screen,0)
-            mask.set_alpha(alpha)
-            balls=[Ball(*[int(random()*dim) for dim in screen]) for _ in range(1000)]
+        match event.type:
+            case pg.QUIT:
+                b=pg.quit()
+            case pg.MOUSEBUTTONUP:
+                if event.button==4 or event.button==5:
+                    sizeXspeed+=1 if event.button==4 else -1
+                new_ball()
+                seed()
+            case pg.KEYUP:
+                if event.key==pg.K_UP:
+                    depx+=1
+                elif event.key==pg.K_DOWN:
+                    depx-=1
+            case pg.VIDEORESIZE:
+                screen=event.w,event.h
+                mask=pg.Surface(screen,0)
+                mask.set_alpha(alpha)
+                balls=[Ball(*[int(random()*dim) for dim in screen]) for _ in range(1000)]
               
                 
             
