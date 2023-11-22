@@ -1,12 +1,14 @@
 import math
 from random import random,choice,seed
 import pygame as pg
-import noise
+import perlin_noise as noise
 from colorsys import hsv_to_rgb
 screen=(500,500)
 sizeXspeed=5
 depx=0
 alpha=1
+
+noise = noise.PerlinNoise(octaves=10,seed=1)
 class Ball:
     def __init__(self,x,y):
         self.x,self.y=x,y
@@ -20,8 +22,8 @@ class Ball:
         return self.x,self.y
     
     def move(self):
-        val=noise.pnoise2(self.x/screen[0],self.y/screen[1],octaves=10,base=depx)
-        self.coul=hsv_to_rgb(0,1,(val+.5)*255)
+        val = abs(noise([self.x/screen[0],self.y/screen[1]]))
+        self.coul=hsv_to_rgb(0,1,(val)*255)
         self.vecx=math.cos(val*math.pi)*sizeXspeed
         self.vecy=math.sin(val*math.pi)*sizeXspeed
                 

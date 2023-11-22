@@ -1,5 +1,3 @@
-
 *.pyc
-__pycache__/dee.cpython-39.pyc
-__pycache__/utis.cpython-39.pyc
+__pycache__/*
 *.pyc
